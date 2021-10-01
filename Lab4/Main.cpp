@@ -40,7 +40,15 @@ int main()
 int rounding(int b)
 {
 	int c = b % 3;
-	cout << " " << c;
+	if (c == 2 || c == -1)
+	{
+		b = b + 1;
+	}
+	else if (c == 1 || c == -2)
+	{
+		b = b - 1;
+	}
+	cout << " " << c << " " << b; 
 	return 0;
 }
 
@@ -48,6 +56,6 @@ int rounding(int b)
 // heading to give scale of bar graph
 // range -30 to 120
 // one star = 3 degrees
-// 
+// Lab 3 and chapter4example are good resources
 // 
 

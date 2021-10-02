@@ -18,19 +18,21 @@
 using namespace std;
 
 int rounding(int b);
+int stars(int d);
 
 int main()
 {
 	ifstream inFile;
-
 	inFile.open("TemperatureInputs.dat");
+
+	int a;
 	
 	while (!inFile.eof())
 	{
-		int a;
 		inFile >> a;
 		cout << a;
-		rounding(a);
+		int rounded = rounding(a);
+		stars(rounded);
 		cout << endl;
 	}
 
@@ -48,7 +50,31 @@ int rounding(int b)
 	{
 		b = b - 1;
 	}
-	cout << " " << c << " " << b; 
+	return b;
+}
+
+int stars(int d)
+{
+	int star = 0;
+	int divided = d / 3;
+	if (d >= 0)
+	{
+		cout << "|";
+		while (divided > star)
+		{
+			cout << " * ";
+			star = star + 1;
+		}
+	}
+	else
+	{
+		while (divided < star)
+		{
+			cout << " * ";
+			star = star - 1;
+		}
+		cout << "|";
+	}
 	return 0;
 }
 
@@ -58,4 +84,4 @@ int rounding(int b)
 // one star = 3 degrees
 // Lab 3 and chapter4example are good resources
 // 
-
+//

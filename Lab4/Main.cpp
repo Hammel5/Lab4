@@ -25,13 +25,14 @@ int main()
 	ifstream inFile;
 	inFile.open("TemperatureInputs.dat");
 
-	int a;
-	
-	while (!inFile.eof())
+	int Temperature;
+
+	cout << "Every * is a repsentation of 3 degrees. Like 15 is equal to ***** " << endl << "The range of the graph is - 30 to 120. The | is the 0 mark" << endl << endl;
+	while (!inFile.eof()) // Run the program until it reads everything in the file
 	{
-		inFile >> a;
-		cout << a;
-		int rounded = rounding(a);
+		inFile >> Temperature;
+		cout << Temperature << "\t" << "- ";
+		int rounded = rounding(Temperature);
 		stars(rounded);
 		cout << endl;
 	}
@@ -39,7 +40,7 @@ int main()
 	inFile.close();
 }
 
-int rounding(int b)
+int rounding(int b) // Rounds the temp to a multiple of 3
 {
 	int c = b % 3;
 	if (c == 2 || c == -1)
@@ -55,22 +56,40 @@ int rounding(int b)
 
 int stars(int d)
 {
+	if (d < -30) // Changes the Temp to be in the acceptable range -30 to 120
+	{
+		d = -30;
+	}
+	else if (d > 120)
+	{
+		d = 120;
+	}
+
 	int star = 0;
 	int divided = d / 3;
+	int temp = 10 + divided;
+	int e = 0;
+
 	if (d >= 0)
 	{
-		cout << "|";
+		cout << "          |";
 		while (divided > star)
 		{
-			cout << " * ";
+			cout << "*";
 			star = star + 1;
 		}
 	}
 	else
 	{
+		while (e < temp) // Creates the spacing for the bar to line up
+		{
+			cout << " ";
+			e = e + 1;
+		}
+		
 		while (divided < star)
 		{
-			cout << " * ";
+			cout << "*";
 			star = star - 1;
 		}
 		cout << "|";
@@ -78,10 +97,8 @@ int stars(int d)
 	return 0;
 }
 
-// bar of stars with the temp to the bar left of the bar
 // heading to give scale of bar graph
-// range -30 to 120
-// one star = 3 degrees
-// Lab 3 and chapter4example are good resources
+// Ask about how bar is actually supposed to look like
+// better variable names
+// appropriate comments
 // 
-//

@@ -14,11 +14,12 @@
 
 #include <iostream> // Allows the ability to input and output 
 #include <fstream> // Allows for File Read and Write
+#include <iomanip> // Allows to use the setw() function
 
 using namespace std;
 
-int rounding(int b);
-int stars(int d);
+int rounding(int a);
+int stars(int rTemp);
 
 int main()
 {
@@ -27,8 +28,8 @@ int main()
 
 	int Temperature;
 
-	cout << "Every * is a repsentation of 3 degrees. Like 15 is equal to ***** " << endl << "The range of the graph is - 30 to 120. The | is the 0 mark" << endl << endl;
-	while (!inFile.eof()) // Run the program until it reads everything in the file
+	cout << "Range: \t -30" << setw(9) << "0" << setw(10) << "30" << setw(10) << "60" << setw(10) << "90" << setw(10) << "120" << endl;
+	while (inFile) // Run the program until it reads everything in the file
 	{
 		inFile >> Temperature;
 		cout << Temperature << "\t" << "- ";
@@ -40,39 +41,39 @@ int main()
 	inFile.close();
 }
 
-int rounding(int b) // Rounds the temp to a multiple of 3
+int rounding(int a) // Rounds the temp to a multiple of 3. Contains temporary variables for the calucations
 {
-	int c = b % 3;
-	if (c == 2 || c == -1)
+	int b = a % 3;
+	if (b == 2 || b == -1)
 	{
-		b = b + 1;
+		a = a + 1;
 	}
-	else if (c == 1 || c == -2)
+	else if (b == 1 || b == -2)
 	{
-		b = b - 1;
+		a = a - 1;
 	}
-	return b;
+	return a;
 }
 
-int stars(int d)
+int stars(int rTemp) // rTemp equals rounded temp
 {
-	if (d < -30) // Changes the Temp to be in the acceptable range -30 to 120
+	if (rTemp < -30) // Changes the Temp to be in the acceptable range -30 to 120
 	{
-		d = -30;
+		rTemp = -30;
 	}
-	else if (d > 120)
+	else if (rTemp > 120)
 	{
-		d = 120;
+		rTemp = 120;
 	}
 
 	int star = 0;
-	int divided = d / 3;
-	int temp = 10 + divided;
-	int e = 0;
+	int divided = rTemp / 3;
+	int spacing = 10 + divided;
+	int count = 0;
 
-	if (d >= 0)
+	if (rTemp >= 0) // Translates the number to stars for the positive numbers 
 	{
-		cout << "          |";
+		cout << setw(11) <<  "|";
 		while (divided > star)
 		{
 			cout << "*";
@@ -81,13 +82,13 @@ int stars(int d)
 	}
 	else
 	{
-		while (e < temp) // Creates the spacing for the bar to line up
+		while (count < spacing) // Creates the spacing for the bar to line up
 		{
 			cout << " ";
-			e = e + 1;
+			count = count + 1;
 		}
 		
-		while (divided < star)
+		while (divided < star) // Translates the number to stars for the negative numbers
 		{
 			cout << "*";
 			star = star - 1;
@@ -97,7 +98,6 @@ int stars(int d)
 	return 0;
 }
 
-// heading to give scale of bar graph
 // Ask about how bar is actually supposed to look like
 // better variable names
 // appropriate comments

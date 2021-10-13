@@ -28,8 +28,8 @@ int main()
 
 	int Temperature;
 
-	cout << "Range: \t -30" << setw(9) << "0" << setw(10) << "30" << setw(10) << "60" << setw(10) << "90" << setw(10) << "120" << endl;
-	while (inFile) // Run the program until it reads everything in the file
+	cout << "Range: \t -30" << setw(9) << "0" << setw(11) << "30" << setw(10) << "60" << setw(10) << "90" << setw(10) << "120" << endl;
+	while (!inFile.eof()) // Run the program until it reads everything in the file
 	{
 		inFile >> Temperature;
 		cout << Temperature << "\t" << "- ";
@@ -55,50 +55,47 @@ int rounding(int a) // Rounds the temp to a multiple of 3. Contains temporary va
 	return a;
 }
 
-int stars(int rTemp) // rTemp equals rounded temp
+int stars(int rTemp) // rTemp is the rounded temp
 {
-	if (rTemp < -30) // Changes the Temp to be in the acceptable range -30 to 120
+	if (rTemp < -30) // Runs and Outputs if the temperature is lower than the acceptable range
 	{
-		rTemp = -30;
+		cout << "TEMPERATURE IS TOO LOW. IT IS OUTSIDE THE ACCEPTABLE RANGE";
 	}
-	else if (rTemp > 120)
+	else if (rTemp > 120) // Runs and Outputs if the temperature is higher than the acceptable range
 	{
-		rTemp = 120;
+		cout << "TEMPERATURE IS TOO HIGH. IT IS OUTSIDE THE ACCEPTABLE RANGE";
 	}
+	else // Runs and Outputs if the temperature is in the acceptable range
+	{
+		int star = 0;
+		int divided = rTemp / 3;
+		int spacing = 10 + divided;
+		int count = 0;
 
-	int star = 0;
-	int divided = rTemp / 3;
-	int spacing = 10 + divided;
-	int count = 0;
+		if (rTemp >= 0) // Translates the number to stars for the positive numbers 
+		{
+			cout << setw(11) << "|";
+			while (divided > star)
+			{
+				cout << "*";
+				star = star + 1;
+			}
+		}
+		else
+		{
+			while (count < spacing) // Creates the spacing for the bar to line up
+			{
+				cout << " ";
+				count = count + 1;
+			}
 
-	if (rTemp >= 0) // Translates the number to stars for the positive numbers 
-	{
-		cout << setw(11) <<  "|";
-		while (divided > star)
-		{
-			cout << "*";
-			star = star + 1;
+			while (divided < star) // Translates the number to stars for the negative numbers
+			{
+				cout << "*";
+				star = star - 1;
+			}
+			cout << "|";
 		}
-	}
-	else
-	{
-		while (count < spacing) // Creates the spacing for the bar to line up
-		{
-			cout << " ";
-			count = count + 1;
-		}
-		
-		while (divided < star) // Translates the number to stars for the negative numbers
-		{
-			cout << "*";
-			star = star - 1;
-		}
-		cout << "|";
 	}
 	return 0;
 }
-
-// Ask about how bar is actually supposed to look like
-// better variable names
-// appropriate comments
-// 
